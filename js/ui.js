@@ -30,6 +30,31 @@ export function renderRace(results, raceProgress) {
     const raceGrid = document.createElement('div');
     raceGrid.className = 'race-grid';
 
+    // Zeitleiste über den Rennbahnen
+    const timeline = document.createElement('div');
+    timeline.className = 'timeline';
+
+    const timelineLabels = document.createElement('div');
+    timelineLabels.className = 'timeline-labels';
+
+    const lastElectionLabel = document.createElement('span');
+    lastElectionLabel.className = 'timeline-label timeline-label-start';
+    lastElectionLabel.textContent = raceProgress.lastElection.toLocaleDateString('de-DE');
+
+    const todayLabel = document.createElement('span');
+    todayLabel.className = 'timeline-label timeline-label-today';
+    todayLabel.textContent = raceProgress.today.toLocaleDateString('de-DE');
+
+    const nextElectionLabel = document.createElement('span');
+    nextElectionLabel.className = 'timeline-label timeline-label-end';
+    nextElectionLabel.textContent = raceProgress.nextElection.toLocaleDateString('de-DE');
+
+    timelineLabels.appendChild(lastElectionLabel);
+    timelineLabels.appendChild(todayLabel);
+    timelineLabels.appendChild(nextElectionLabel);
+    timeline.appendChild(timelineLabels);
+    container.appendChild(timeline);
+
     // Spalten erstellen
     const labelsColumn = document.createElement('div');
     labelsColumn.className = 'labels-column';
@@ -131,6 +156,11 @@ export function renderRace(results, raceProgress) {
     setTimeout(() => {
         const trackWidth = tracksColumn.offsetWidth - 60; // Platz für Pferd
         const leaderPosition = raceProgress.progress * trackWidth;
+
+        // Positioniere "Heute" Label auf der Zeitleiste
+        const timelineWidth = timelineLabels.offsetWidth;
+        const todayPosition = raceProgress.progress * timelineWidth;
+        todayLabel.style.left = todayPosition + 'px';
 
         // Positioniere 5%-Hürde
         const hurdleRelativePosition = 5 / maxPercentage;

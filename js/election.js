@@ -27,7 +27,9 @@ export function calculateRaceProgress() {
 
     return {
         progress,
+        lastElection,
         nextElection,
+        today: now,
         daysUntil: Math.ceil((nextElection - now) / (1000 * 60 * 60 * 24))
     };
 }
