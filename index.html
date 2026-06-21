@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wahlumfragen Pferderennen</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Wahlumfragen Pferderennen</h1>
+    <p class="subtitle">Bundestag - Wer liegt vorne?</p>
+
+    <div class="info-box" id="info-box">
+        <span id="last-update">Lade Daten...</span>
+        <span id="next-election"></span>
+        <span id="progress-info"></span>
+    </div>
+
+    <div class="race-container" id="race-container">
+        <div class="loading" id="loading">
+            <div class="loading-spinner"></div>
+            <p>Die Pferde werden gesattelt...</p>
+        </div>
+    </div>
+
+    <div class="source">
+        Datenquelle: <a href="https://dawum.de/Bundestag/" target="_blank">dawum.de</a> |
+        Lizenz: ODC-ODbL
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
