@@ -69,6 +69,12 @@ export function renderRace(results, raceProgress) {
         const track = document.createElement('div');
         track.className = 'race-track';
 
+        // 5%-Hürde-Linie pro Bahn
+        const hurdleLine = document.createElement('div');
+        hurdleLine.className = 'hurdle-line';
+        hurdleLine.style.left = '10px';
+        track.appendChild(hurdleLine);
+
         const horseContainer = document.createElement('div');
         horseContainer.className = 'horse-container';
         horseContainer.style.left = '10px';
@@ -83,7 +89,7 @@ export function renderRace(results, raceProgress) {
 
         // Speichere für Animation
         const relativePosition = party.percentage / maxPercentage;
-        horseContainers.push({ container: horseContainer, relativePosition, index });
+        horseContainers.push({ container: horseContainer, hurdleLine, relativePosition, index });
 
         // Ziellinie-Segment (Finish-Spalte)
         const finishSegment = document.createElement('div');
@@ -126,10 +132,19 @@ export function renderRace(results, raceProgress) {
         const trackWidth = tracksColumn.offsetWidth - 60; // Platz für Pferd
         const leaderPosition = raceProgress.progress * trackWidth;
 
-        horseContainers.forEach(({ container: horseContainer, relativePosition, index }) => {
+        // Positioniere 5%-Hürde
+        const hurdleRelativePosition = 5 / maxPercentage;
+        const hurdlePosition = hurdleRelativePosition * leaderPosition;
+
+        horseContainers.forEach(({ container: horseContainer, hurdleLine, relativePosition, index }) => {
+            // Positioniere Hürde-Linie
+            hurdleLine.style.left = (10 + hurdlePosition) + 'px';
+
             const position = relativePosition * leaderPosition;
+            // Pferd links vom Prozentsatz positionieren (rechte Kante = Position)
+            const horseWidth = horseContainer.offsetWidth;
             setTimeout(() => {
-                horseContainer.style.left = (10 + position) + 'px';
+                horseContainer.style.left = (10 + position - horseWidth) + 'px';
             }, index * 100);
         });
     }, 50);
