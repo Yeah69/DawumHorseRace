@@ -43,8 +43,7 @@ h1 {
     background: #8B4513;
     border-radius: 15px;
     padding: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
+    margin: 0 20px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     position: relative;
 }
